@@ -1,6 +1,6 @@
 # test.py
 
-import libreria_IyR
+from libreria_IyR import *
 
 #################### PROGRAMA DE TEST #######################
 # simplemente vamos a probar que la funcion sleep() funciona

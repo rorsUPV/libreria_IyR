@@ -2,22 +2,22 @@
 
 ################### TRATAMIENTO DE CADENAS ####################################
 
-def split(cadena, separador):
+def iyr_split(cadena, separador):
     return cadena.split(separador)
 
-def strip(cadena):
+def iyr_strip(cadena):
     return cadena.strip()
 
-def lower(cadena):
+def iyr_lower(cadena):
     return cadena.lower()
 
-def upper(cadena):
+def iyr_upper(cadena):
     return cadena.upper()
 
-def isdigit(cadena):
+def iyr_isdigit(cadena):
     return cadena.isdigit()
 
-def es_numerico(cadena):
+def iyr_es_numerico(cadena):
     try:
         float(cadena)
         return True
@@ -27,23 +27,23 @@ def es_numerico(cadena):
 ################### TRATAMIENTO DE TUPLAS ####################################
 
 ################### TRATAMIENTO DE LISTAS ####################################
-def append(lista, elemento):
+def iyr_append(lista, elemento):
     lista.append(elemento)
   
-def insert(lista, posicion, elemento):
+def iyr_insert(lista, posicion, elemento):
     lista.insert(posicion, elemento)
 
-def remove(lista, elemento):
+def iyr_remove(lista, elemento):
     lista.remove(elemento)
 
 # funciones para el tratamiento de Diccionarios
-def keys(diccionario):
+def iyr_keys(diccionario):
     return diccionario.keys()
 
-def values(diccionario):
+def iyr_values(diccionario):
     return diccionario.values()
 
-def pop(diccionario, clave):
+def iyr_pop(diccionario, clave):
     return diccionario.pop(clave)
 
 ################### TRATAMIENTO DE TEMPORIZADORES ####################################
@@ -54,6 +54,6 @@ def retardo(tiempo):
 ################### VARIABLES ALEATORIAS ####################################
 import random
 
-def randint(a, b):
+def iyr_randint(a, b):
     return random.randint(a, b)
     
