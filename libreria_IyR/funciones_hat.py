@@ -20,49 +20,49 @@ def activar_SenseHat():
 
 ################### FUNCIONES SALIDA DIGITAL ####################################
 
-def set_rotation(angulo):
+def iyr_set_rotation(angulo):
     if _modo_real and _hat:
         _hat.set_rotation(angulo)
     else:
         return("[PANTALLA LED SIMULADA]: Rotacion de "+str(angulo)+" Grados")
 
-def set_pixels(lista):
+def iyr_set_pixels(lista):
     if _modo_real and _hat:
         _hat.set_pixels(lista)
     else:
         return("[PANTALLA LED SIMULADA]: recibida lista de pixels")
 
-def get_pixels():
+def iyr_get_pixels():
     if _modo_real and _hat:
         return _hat.get_pixels()
     else:
         return("[PANTALLA LED SIMULADA]: retorna la lista de pixels")
 
-def set_pixel(c_X, c_Y, color):
+def iyr_set_pixel(c_X, c_Y, color):
     if _modo_real and _hat:
         _hat.set_pixel(c_X, c_Y, color)
     else:
         return("[PANTALLA LED SIMULADA]: colocado el pixel: ("+str(c_X)+','+str(c_Y)+') al color: '+color)
 
-def get_pixel(c_X, c_Y):
+def iyr_get_pixel(c_X, c_Y):
     if _modo_real and _hat:
         return _hat.get_pixel(c_X, c_Y)
     else:
         return("[PANTALLA LED SIMULADA]: retrna el color del pixel: ("+str(c_X)+','+str(c_Y)+')')
 
-def clear(r, g, b):
+def iyr_clear(r, g, b):
     if _modo_real and _hat:
         _hat.clear(r, g, b)
     else:
         return(f"[FONDO SIMULADO]: Color R={r}, G={g}, B={b}")
 
-def show_message(texto):
+def iyr_show_message(texto):
     if _modo_real and _hat:
         _hat.show_message(texto)
     else:
         return(f"[PANTALLA LED SIMULADA]: {texto}")
 
-def show_letter(letra, clor_L, color_F):
+def iyr_show_letter(letra, clor_L, color_F):
     if _modo_real and _hat:
         _hat.show_letter(letra, clor_L, color_F)
     else:
@@ -70,13 +70,13 @@ def show_letter(letra, clor_L, color_F):
         
 ################### FUNCIONES ENTRADA DIGITAL ####################################
         
-def get_events():
+def iyr_get_events():
     if _modo_real and _hat:
         return _hat.get_events()
     else:
         return("[PANTALLA LED SIMULADA]: retorna el evento sucedido")
 
-def wait_for_event(buffer):
+def iyr_wait_for_event(buffer):
     if _modo_real and _hat:
         return _hat.wait_for_event(buffer)
     else:
@@ -87,37 +87,37 @@ def wait_for_event(buffer):
         
 ################### FUNCIONES ENTRADA ANALOGICA ###################################
 
-def get_pressure():
+def iyr_get_pressure():
     if _modo_real and _hat:
         return _hat.get_pressure()
     else:
         return("[PANTALLA LED SIMULADA]: retorna la presión")
         
-def get_humidity():
+def iyr_get_humidity():
     if _modo_real and _hat:
         return _hat.get_humidity()
     else:
         return("[PANTALLA LED SIMULADA]: retorna la humedad relativa")
         
-def get_temperature():
+def iyr_get_temperature():
     if _modo_real and _hat:
         return _hat.get_humidity()
     else:
         return("[PANTALLA LED SIMULADA]: retorna la temperatura")
 
-def set_imu_config(compass, gyro, accel ):
+def iyr_set_imu_config(compass, gyro, accel ):
     if _modo_real and _hat:
         _hat.set_imu_config(compass, gyro, accel )
     else:
         return("[PANTALLA LED SIMULADA]: activa la configuracion del imu")
 
-def get_orientation_degrees():
+def iyr_get_orientation_degrees():
     if _modo_real and _hat:
         return _hat.get_orientation_degrees()
     else:
         return("[PANTALLA LED SIMULADA]: retorna la orientación")
 
-def get_compass():
+def iyr_get_compass():
     if _modo_real and _hat:
         return _hat.get_compass()
     else:

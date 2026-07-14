@@ -32,7 +32,7 @@ def TimeOut_vencido():
     else:
         return False
 
-def sleep(tiempo):
+def iyr_sleep(tiempo):
     time.sleep(tiempo)
 
 ################## FUNCIONES MANEJO FECHA Y HORA #####################

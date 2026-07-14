@@ -59,10 +59,10 @@ def obtener_IP_Local():
 
 ################## FUNCIONES MANEJO cadenas bytes #####################
     
-def encode(texto):
+def iyr_encode(texto):
     return texto.encode()
 
-def decode(cadena):
+def iyr_decode(cadena):
     return cadena.decode()
 
 ################## FUNCIONES MANEJO UDP #####################
@@ -107,13 +107,13 @@ def obtener_parametros_socket(puerto):
     parametros = sockets_locales[puerto].getsockname()
     return parametros
     
-def sendto(puerto, mensaje, socket_destino):
+def iyr_sendto(puerto, mensaje, socket_destino):
     sockets_locales[puerto].sendto(mensaje, socket_destino)
 
-def receivefrom(puerto, long_buffer):
+def iyr_receivefrom(puerto, long_buffer):
     return sockets_locales[puerto].recvfrom(long_buffer)
 
-def close(puerto):
+def iyr_close(puerto):
     sockets_locales[puerto].close()
 
 ################## FUNCIONES MANEJO TCP #####################
@@ -148,10 +148,10 @@ def conectar_socket_cliente(parametros_socket_servidor):
     conexion = (ip_cliente, puerto_cliente, ip_servidor, puerto_servidor)
     return conexion
     
-def send(conexion, mensaje):
+def iyr_send(conexion, mensaje):
     puerto_socket = conexion[1]
     sockets_locales[puerto_socket].send(mensaje)
 
-def recv(conexion, long_buffer):
+def iyr_recv(conexion, long_buffer):
     puerto_socket = conexion[1]
     return sockets_locales[puerto_socket].recv(long_buffer)
