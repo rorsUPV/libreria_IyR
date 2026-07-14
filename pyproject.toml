@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libreria_IyR"
+version = "0.1.0"
+description = "Librería didáctica para el curso de IyR"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    {name = "Rafael", email = "tu@email.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools]
+packages = ["libreria_IyR"]
