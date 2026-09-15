@@ -17,7 +17,7 @@ def iyr_upper(cadena):
 def iyr_isdigit(cadena):
     return cadena.isdigit()
 
-def iyr_es_numerico(cadena):
+def es_numerico(cadena):
     try:
         float(cadena)
         return True
@@ -25,6 +25,14 @@ def iyr_es_numerico(cadena):
         return False
 
 ################### TRATAMIENTO DE TUPLAS ####################################
+
+################## FUNCIONES MANEJO cadenas bytes #####################
+    
+def iyr_encode(texto):
+    return texto.encode()
+
+def iyr_decode(cadena):
+    return cadena.decode()
 
 ################### TRATAMIENTO DE LISTAS ####################################
 def iyr_append(lista, elemento):
@@ -45,11 +53,6 @@ def iyr_values(diccionario):
 
 def iyr_pop(diccionario, clave):
     return diccionario.pop(clave)
-
-################### TRATAMIENTO DE TEMPORIZADORES ####################################
-
-def retardo(tiempo):
-    time.sleep(tiempo)
 
 ################### VARIABLES ALEATORIAS ####################################
 import random

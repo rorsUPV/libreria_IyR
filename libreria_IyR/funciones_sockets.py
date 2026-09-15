@@ -3,43 +3,13 @@
 import ipaddress
 import threading
 import time
-
-try:
-    from socket import *
-except (ImportError, RuntimeError):
-    print("\n[AVISO IyR]: No se pudo importtar la clase socket.\n")
+import socket
+import urllib.request
+import ssl
 
 ################## DECLARACION VARIABLES GLOBALES #####################
 
 sockets_locales = {}  # diccionario donde almacenar los sockets locales
-_tiempo_vencimiento = 0.0 # Variable global para el temporizador
-
-################## FUNCIONES MANEJO HILOS y TEMPORIZADORES #####################
-
-def lanzaHilo(nombre_funcion):
-    hilo = threading.Thread(target=nombre_funcion)
-    hilo.start()
-
-
-def arrancar_TimeOut(segundos):
-    """Registra el momento exacto del futuro en el que vencerá el tiempo."""
-    global _tiempo_vencimiento
-    tiempo_actual = time.time()  # Segundos actuales desde 1970 [1]
-    _tiempo_vencimiento = tiempo_actual + segundos
-    print(f"[Timer] Arrancado por {segundos} segundos.")
-
-def TimeOut_vencido():
-    """Retorna True si el tiempo actual ya superó el vencimiento, False si no."""
-    global _tiempo_vencimiento
-    tiempo_actual = time.time()
-    
-    if tiempo_actual >= _tiempo_vencimiento:
-        return True
-    else:
-        return False
-
-def sleep(tiempo):
-    time.sleep(tiempo)
     
 ################## FUNCIONES MANEJO IPs #####################
     
@@ -51,19 +21,33 @@ def resolverIPporDominio(Dominio):
         return (False, '')
 
 def obtener_IP_Local():
+    # Creamos un socket UDP temporal
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        ip_local = socket.gethostbyname(socket.gethostname())
-        return (True,ip_local)
-    except socket.error:
-        return (False, 'localhost')
+        # No necesita conectarse realmente, solo simula una salida hacia internet
+        # para que el sistema operativo le asigne la IP de la interfaz de red activa
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+        ip_publica = (True, ip)
+    except Exception:
+        # Si no hay internet en absoluto, recurrimos al localhost
+        ip = '127.0.0.1'
+        ip_publica = (False, ip)
+    finally:
+        s.close()
+    return ip_publica
 
-################## FUNCIONES MANEJO cadenas bytes #####################
-    
-def iyr_encode(texto):
-    return texto.encode()
+def obtener_IP_Publica():
+    try:
+        contexto_seguro = ssl._create_unverified_context()
+        # Intentamos conectar con ipify que es muy estable
+        with urllib.request.urlopen('https://api.ipify.org', context=contexto_seguro, timeout=5) as respuesta:
+            ip = respuesta.read().decode('utf-8').strip()
+            return (True, ip)
+    except Exception as e:
+        # Aquí capturamos el error real y devolvemos qué lo causó
+        return (False, '')
 
-def iyr_decode(cadena):
-    return cadena.decode()
 
 ################## FUNCIONES MANEJO UDP #####################
     
@@ -119,7 +103,7 @@ def iyr_close(puerto):
 ################## FUNCIONES MANEJO TCP #####################
     
 def crear_socket_acogida(parametros_socket_servidor, max_conexiones):
-    socket_servidorTCP = socket(AF_INET, SOCK_STREAM)
+    socket_servidorTCP = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket_servidorTCP.bind((parametros_socket_servidor))
     socket_servidorTCP.listen(max_conexiones)
     ip_acogida = parametros_socket_servidor[0]
@@ -140,7 +124,7 @@ def aceptar_conexiones(socket_acogida):
     return conexion
 
 def conectar_socket_cliente(parametros_socket_servidor):
-    socket_conectado_lado_cliente = socket(AF_INET, SOCK_STREAM)
+    socket_conectado_lado_cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket_conectado_lado_cliente.connect(parametros_socket_servidor)
     ip_cliente, puerto_cliente = socket_conectado_lado_cliente.getsockname()
     sockets_locales[puerto_cliente] = socket_conectado_lado_cliente
