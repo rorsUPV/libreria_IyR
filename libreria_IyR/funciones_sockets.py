@@ -6,6 +6,7 @@ import time
 import socket
 import urllib.request
 import ssl
+from socket import *
 
 ################## DECLARACION VARIABLES GLOBALES #####################
 
